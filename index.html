@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aplikacja Budżetowa</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Monitorowanie Budżetu Domowego</h1>
+
+      <div class="budget-summary">
+        <h2>Bilans: <span id="balance">0 zł</span></h2>
+        <p id="balance-message"></p>
+      </div>
+
+      <div class="transaction-form">
+        <h3>Dodaj Przychód/Wydatek</h3>
+        <input type="text" id="description" placeholder="Opis" />
+        <input type="number" id="amount" placeholder="Kwota (PLN)" />
+        <select id="type">
+          <option value="income">Przychód</option>
+          <option value="expense">Wydatek</option>
+        </select>
+        <button onclick="addTransaction()">Dodaj</button>
+      </div>
+
+      <div class="transaction-list">
+        <h3>Transakcje</h3>
+        <ul id="transactions"></ul>
+      </div>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
