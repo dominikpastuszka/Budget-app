@@ -3,32 +3,71 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Aplikacja Budżetowa</title>
+    <title>Monitorowanie Budżetu Domowego</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="container">
-      <h1>Monitorowanie Budżetu Domowego</h1>
+      <header>
+        <h1>Budżet Domowy</h1>
+      </header>
 
-      <div class="budget-summary">
-        <h2>Bilans: <span id="balance">0 zł</span></h2>
-        <p id="balance-message"></p>
-      </div>
+      <h2 id="balance">Bilans: 0 zł</h2>
 
-      <div class="transaction-form">
-        <h3>Dodaj Przychód/Wydatek</h3>
-        <input type="text" id="description" placeholder="Opis" />
-        <input type="number" id="amount" placeholder="Kwota (PLN)" />
-        <select id="type">
-          <option value="income">Przychód</option>
-          <option value="expense">Wydatek</option>
-        </select>
-        <button onclick="addTransaction()">Dodaj</button>
-      </div>
+      <form id="transaction-form">
+        <div class="form-group">
+          <input type="text" id="description" placeholder="Opis" required />
+          <p id="description-error" class="error-message"></p>
+        </div>
+        <div class="form-group">
+          <input
+            type="number"
+            id="amount"
+            placeholder="Kwota"
+            min="0.01"
+            step="0.01"
+            required
+          />
+          <p id="amount-error" class="error-message"></p>
+        </div>
+        <div class="form-group">
+          <select id="type">
+            <option value="income">Przychód</option>
+            <option value="expense">Wydatek</option>
+          </select>
+        </div>
+        <button type="submit">Dodaj</button>
+      </form>
 
-      <div class="transaction-list">
-        <h3>Transakcje</h3>
-        <ul id="transactions"></ul>
+      <ul id="transaction-list" class="transaction-list"></ul>
+    </div>
+
+    <div id="edit-modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Edytuj transakcję</h2>
+        <form id="edit-form">
+          <input type="hidden" id="edit-id" />
+          <input
+            type="text"
+            id="edit-description"
+            placeholder="Opis"
+            required
+          />
+          <input
+            type="number"
+            id="edit-amount"
+            placeholder="Kwota"
+            min="0.01"
+            step="0.01"
+            required
+          />
+          <select id="edit-type">
+            <option value="income">Przychód</option>
+            <option value="expense">Wydatek</option>
+          </select>
+          <button type="submit">Zapisz zmiany</button>
+        </form>
       </div>
     </div>
 
