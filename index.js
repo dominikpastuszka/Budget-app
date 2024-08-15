@@ -5,6 +5,7 @@ const transactionForm = document.getElementById("transaction-form");
 const transactionList = document.getElementById("transaction-list");
 const balanceText = document.getElementById("balance");
 
+// Modal elements
 const editModal = document.getElementById("edit-modal");
 const closeModal = document.getElementsByClassName("close")[0];
 const editForm = document.getElementById("edit-form");
@@ -80,7 +81,7 @@ function updateDOM() {
     li.classList.add(transaction.type);
     li.innerHTML = `${transaction.description}: ${transaction.amount} zł 
                         <button onclick="editTransaction(${transaction.id})">Edytuj</button>
-                        <button onclick="deleteTransaction(${transaction.id})">Usuń</button>`;
+                        <button onclick="confirmDeleteTransaction(${transaction.id})">Usuń</button>`;
     transactionList.appendChild(li);
   });
 }
@@ -134,6 +135,18 @@ function saveEditedTransaction(e) {
     updateBalance();
 
     editModal.style.display = "none";
+  }
+}
+
+function confirmDeleteTransaction(id) {
+  const transaction = transactions.find((t) => t.id === id);
+
+  if (
+    confirm(
+      `Czy na pewno chcesz usunąć "${transaction.description}" o wartości ${transaction.amount} zł?`
+    )
+  ) {
+    deleteTransaction(id);
   }
 }
 
